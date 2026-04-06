@@ -2,7 +2,7 @@
 ///
 /// Flutter plugin for the Adaptive SDK Core module.
 /// Provides SDK initialization, user management, and HTTP client functionality.
-library adaptive_core_flutter;
+library adaptive_core;
 
 export 'src/adaptive_core.dart';
 export 'src/adaptive_user.dart';

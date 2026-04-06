@@ -1,4 +1,4 @@
-package com.adaptive.core_flutter
+package com.adaptive.core
 
 import android.content.Context
 import android.os.Handler
@@ -79,34 +79,6 @@ class AdaptiveCoreFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     result.success(null)
                 } catch (e: Exception) {
                     result.error("LOGOUT_ERROR", e.message, null)
-                }
-            }
-
-            "post" -> {
-                val path = call.argument<String>("path")
-                    ?: return result.error("INVALID_ARGUMENT", "path is required", null)
-                val body = call.argument<String>("body")
-                    ?: return result.error("INVALID_ARGUMENT", "body is required", null)
-                scope.launch {
-                    try {
-                        AdaptiveCore.post(path, body)
-                        mainHandler.post { result.success(null) }
-                    } catch (e: Exception) {
-                        mainHandler.post { result.error("POST_ERROR", e.message, null) }
-                    }
-                }
-            }
-
-            "get" -> {
-                val path = call.argument<String>("path")
-                    ?: return result.error("INVALID_ARGUMENT", "path is required", null)
-                scope.launch {
-                    try {
-                        AdaptiveCore.get(path)
-                        mainHandler.post { result.success(null) }
-                    } catch (e: Exception) {
-                        mainHandler.post { result.error("GET_ERROR", e.message, null) }
-                    }
                 }
             }
 

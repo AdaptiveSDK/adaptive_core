@@ -1,8 +1,9 @@
-# adaptive_core_flutter
+# adaptive_core
 
-[![pub version](https://img.shields.io/pub/v/adaptive_core_flutter.svg)](https://pub.dev/packages/adaptive_core_flutter)
+[![pub version](https://img.shields.io/pub/v/adaptive_core.svg)](https://pub.dev/packages/adaptive_core)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Platform](https://img.shields.io/badge/platform-android-green.svg)](https://pub.dev/packages/adaptive_core_flutter)
+[![Platform Android](https://img.shields.io/badge/platform-android-green.svg)](https://pub.dev/packages/adaptive_core)
+[![Platform iOS](https://img.shields.io/badge/platform-ios-lightgrey.svg)](https://pub.dev/packages/adaptive_core)
 
 Flutter plugin for the **Adaptive SDK Core** module — the foundation layer required by all other Adaptive plugins. It provides:
 
@@ -10,7 +11,7 @@ Flutter plugin for the **Adaptive SDK Core** module — the foundation layer req
 - 👤 **User session management** (login / logout)
 - 🌐 **Resilient HTTP client** with an offline-first persistent request queue (encrypted storage, exponential back-off, up to 3 automatic retries)
 
-> **Android only.** iOS support is not planned at this time.
+> Supports **Android** and **iOS**.
 
 ---
 
@@ -23,7 +24,6 @@ Flutter plugin for the **Adaptive SDK Core** module — the foundation layer req
   - [Initialize](#1-initialize)
   - [Login](#2-login)
   - [Logout](#3-logout)
-  - [Raw HTTP (advanced)](#4-raw-http-advanced)
 - [Error Handling](#error-handling)
 - [API Reference](#api-reference)
 - [Contributing](#contributing)
@@ -39,6 +39,7 @@ Flutter plugin for the **Adaptive SDK Core** module — the foundation layer req
 | Dart | 3.0.0 |
 | Android `minSdk` | 24 (Android 7.0) |
 | Android `compileSdk` | 34 |
+| iOS minimum | 15.0 |
 
 ---
 
@@ -48,7 +49,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  adaptive_core_flutter: ^1.0.0
+  adaptive_core: ^1.0.0
 ```
 
 Then run:
@@ -92,7 +93,7 @@ allprojects {
 Call **once** at app startup — typically in `main()` before `runApp()`:
 
 ```dart
-import 'package:adaptive_core_flutter/adaptive_core_flutter.dart';
+import 'package:adaptive_core/adaptive_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -130,23 +131,6 @@ await AdaptiveCore.logout();
 
 This clears the current user session and flushes the pending HTTP request queue.
 
-### 4. Raw HTTP (advanced)
-
-You can use the built-in resilient HTTP client directly if needed:
-
-```dart
-// POST
-await AdaptiveCore.post(
-  path: 'moodle/custom-endpoint',
-  body: '{"key": "value"}',
-);
-
-// GET
-await AdaptiveCore.get(path: 'moodle/status');
-```
-
-Requests are queued automatically when the device is offline and retried once connectivity is restored.
-
 ---
 
 ## Error Handling
@@ -168,8 +152,6 @@ try {
 | `INITIALIZATION_ERROR` | SDK failed to initialize (e.g., invalid context) |
 | `LOGIN_ERROR` | Login call failed or SDK not initialized |
 | `LOGOUT_ERROR` | Logout call failed or SDK not initialized |
-| `POST_ERROR` | HTTP POST failed after queue exhaustion |
-| `GET_ERROR` | HTTP GET failed after queue exhaustion |
 | `INVALID_ARGUMENT` | A required argument was missing or null |
 
 ---
@@ -183,8 +165,6 @@ try {
 | `initialize({required String clientId, bool debug = false})` | Initializes the SDK. Must be called first. |
 | `login(AdaptiveUser user)` | Attaches a user to the session. |
 | `logout()` | Clears the session and HTTP queue. |
-| `post({required String path, required String body})` | Sends a resilient POST request. |
-| `get({required String path})` | Sends a resilient GET request. |
 
 ### `AdaptiveUser`
 

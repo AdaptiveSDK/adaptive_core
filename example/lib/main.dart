@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:adaptive_core_flutter/adaptive_core_flutter.dart';
+import 'package:adaptive_core/adaptive_core.dart';
 
 void main() {
   runApp(const MyApp());
@@ -39,6 +39,8 @@ class _HomePageState extends State<HomePage> {
       });
     } on AdaptiveException catch (e) {
       setState(() => _status = '❌ ${e.message}');
+    } catch (e) {
+      setState(() => _status = '❌ $e');
     }
   }
 
@@ -57,6 +59,8 @@ class _HomePageState extends State<HomePage> {
       });
     } on AdaptiveException catch (e) {
       setState(() => _status = '❌ ${e.message}');
+    } catch (e) {
+      setState(() => _status = '❌ $e');
     }
   }
 
@@ -69,6 +73,8 @@ class _HomePageState extends State<HomePage> {
       });
     } on AdaptiveException catch (e) {
       setState(() => _status = '❌ ${e.message}');
+    } catch (e) {
+      setState(() => _status = '❌ $e');
     }
   }
 
@@ -81,23 +87,35 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(_status,
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                _status,
                 style: Theme.of(context).textTheme.titleMedium,
-                textAlign: TextAlign.center),
+                textAlign: TextAlign.center,
+              ),
+            ),
             const SizedBox(height: 32),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _initialized ? null : _initialize,
-              child: const Text('Initialize SDK'),
+              icon: const Icon(Icons.rocket_launch),
+              label: const Text('Initialize SDK'),
             ),
             const SizedBox(height: 12),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: (_initialized && !_loggedIn) ? _login : null,
-              child: const Text('Login'),
+              icon: const Icon(Icons.login),
+              label: const Text('Login'),
             ),
             const SizedBox(height: 12),
-            ElevatedButton(
+            ElevatedButton.icon(
               onPressed: _loggedIn ? _logout : null,
-              child: const Text('Logout'),
+              icon: const Icon(Icons.logout),
+              label: const Text('Logout'),
             ),
           ],
         ),
