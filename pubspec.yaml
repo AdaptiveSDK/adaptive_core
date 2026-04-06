@@ -4,9 +4,9 @@ description: >-
   user session management, and a resilient HTTP client with offline queue for
   the Adaptive e-learning platform.
 version: 1.0.6
-homepage: https://github.com/adaptivesdk/adaptive_core
-repository: https://github.com/adaptivesdk/adaptive_core
-issue_tracker: https://github.com/adaptivesdk/adaptive_core/issues
+homepage: https://github.com/AdaptiveSDK/adaptive_core
+repository: https://github.com/AdaptiveSDK/adaptive_core
+issue_tracker: https://github.com/AdaptiveSDK/adaptive_core/issues
 
 topics:
   - adaptive
