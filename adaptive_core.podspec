@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'adaptive_core'
-  s.version          = '1.0.6'
+  s.version          = '1.0.7'
   s.summary          = 'Flutter iOS plugin for the Adaptive Core SDK.'
   s.description      = 'Provides SDK initialization, user session management, and offline queue for the Adaptive e-learning platform.'
   s.homepage         = 'https://github.com/AdaptiveSDK/AdaptiveiOSSDK'
