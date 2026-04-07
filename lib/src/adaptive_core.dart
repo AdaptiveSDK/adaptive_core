@@ -15,7 +15,7 @@ import 'adaptive_exception.dart';
 /// );
 /// ```
 class AdaptiveCore {
-  static final MethodChannel _channel = MethodChannel('adaptive_core');
+  static const MethodChannel _channel = MethodChannel('adaptive_core');
 
   AdaptiveCore._();
 
