@@ -33,7 +33,8 @@ public class AdaptiveCoreFlutterPlugin: NSObject, FlutterPlugin {
                 result(FlutterError(code: "INVALID_ARGUMENT", message: "userId, userName and userEmail are required", details: nil))
                 return
             }
-            AdaptiveCore.shared.login(userId: userId, userName: userName, userEmail: userEmail)
+            let phoneNumber = args["phoneNumber"] as? String ?? ""
+            AdaptiveCore.shared.login(userId: userId, userName: userName, userEmail: userEmail, phoneNumber: phoneNumber)
             result(nil)
 
         case "logout":

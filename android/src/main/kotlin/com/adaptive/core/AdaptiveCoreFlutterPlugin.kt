@@ -59,12 +59,15 @@ class AdaptiveCoreFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     ?: return result.error("INVALID_ARGUMENT", "userName is required", null)
                 val userEmail = call.argument<String>("userEmail")
                     ?: return result.error("INVALID_ARGUMENT", "userEmail is required", null)
+                val phoneNumber = call.argument<String>("phoneNumber")
+                    ?: return result.error("INVALID_ARGUMENT", "phoneNumber is required", null)
                 try {
                     AdaptiveCore.login(
                         AdaptiveUser(
                             userName = userName,
                             userID = userId,
                             userEmail = userEmail,
+                            phoneNumber = phoneNumber,
                         )
                     )
                     result.success(null)

@@ -8,11 +8,14 @@ class AdaptiveUser {
 
   /// The email address of the user.
   final String userEmail;
+  /// The phone number of the user.
+  final String phoneNumber;
 
   const AdaptiveUser({
     required this.userId,
     required this.userName,
     required this.userEmail,
+    required this.phoneNumber,
   });
 
   /// Serializes the user to a map for the platform channel.
@@ -20,11 +23,12 @@ class AdaptiveUser {
         'userId': userId,
         'userName': userName,
         'userEmail': userEmail,
+        'phoneNumber': phoneNumber,
       };
 
   @override
   String toString() =>
-      'AdaptiveUser(userId: $userId, userName: $userName, userEmail: $userEmail)';
+      'AdaptiveUser(userId: $userId, userName: $userName, userEmail: $userEmail, phoneNumber: $phoneNumber)';
 
   @override
   bool operator ==(Object other) =>
@@ -33,8 +37,9 @@ class AdaptiveUser {
           runtimeType == other.runtimeType &&
           userId == other.userId &&
           userName == other.userName &&
+          phoneNumber == other.phoneNumber &&
           userEmail == other.userEmail;
 
   @override
-  int get hashCode => userId.hashCode ^ userName.hashCode ^ userEmail.hashCode;
+  int get hashCode => userId.hashCode ^ userName.hashCode ^ userEmail.hashCode ^ phoneNumber.hashCode;
 }
