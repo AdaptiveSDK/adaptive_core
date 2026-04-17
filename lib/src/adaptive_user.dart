@@ -1,3 +1,5 @@
+import 'adaptive_user_grade.dart';
+
 /// Represents an authenticated user in the Adaptive SDK.
 class AdaptiveUser {
   /// The unique identifier of the user (e.g., Moodle user ID).
@@ -8,14 +10,22 @@ class AdaptiveUser {
 
   /// The email address of the user.
   final String userEmail;
+
   /// The phone number of the user.
   final String phoneNumber;
+
+  /// The school grade of the user.
+  ///
+  /// When provided, the integer [UserGrade.value] is forwarded to the native
+  /// platform. Pass `null` when the grade is unknown or not applicable.
+  final UserGrade? userGrade;
 
   const AdaptiveUser({
     required this.userId,
     required this.userName,
     required this.userEmail,
     required this.phoneNumber,
+    this.userGrade,
   });
 
   /// Serializes the user to a map for the platform channel.
@@ -24,11 +34,13 @@ class AdaptiveUser {
         'userName': userName,
         'userEmail': userEmail,
         'phoneNumber': phoneNumber,
+        'userGrade': userGrade?.value,
       };
 
   @override
   String toString() =>
-      'AdaptiveUser(userId: $userId, userName: $userName, userEmail: $userEmail, phoneNumber: $phoneNumber)';
+      'AdaptiveUser(userId: $userId, userName: $userName, userEmail: $userEmail, '
+      'phoneNumber: $phoneNumber, userGrade: $userGrade)';
 
   @override
   bool operator ==(Object other) =>
@@ -38,8 +50,14 @@ class AdaptiveUser {
           userId == other.userId &&
           userName == other.userName &&
           phoneNumber == other.phoneNumber &&
-          userEmail == other.userEmail;
+          userEmail == other.userEmail &&
+          userGrade == other.userGrade;
 
   @override
-  int get hashCode => userId.hashCode ^ userName.hashCode ^ userEmail.hashCode ^ phoneNumber.hashCode;
+  int get hashCode =>
+      userId.hashCode ^
+      userName.hashCode ^
+      userEmail.hashCode ^
+      phoneNumber.hashCode ^
+      userGrade.hashCode;
 }

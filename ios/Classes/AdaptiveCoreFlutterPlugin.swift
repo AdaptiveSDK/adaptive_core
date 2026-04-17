@@ -34,7 +34,8 @@ public class AdaptiveCoreFlutterPlugin: NSObject, FlutterPlugin {
                 return
             }
             let phoneNumber = args["phoneNumber"] as? String ?? ""
-            AdaptiveCore.shared.login(userId: userId, userName: userName, userEmail: userEmail, phoneNumber: phoneNumber)
+            let userGrade   = (args["userGrade"] as? Int).flatMap { UserGrade(rawValue: $0) }
+            AdaptiveCore.shared.login(userId: userId, userName: userName, userEmail: userEmail, phoneNumber: phoneNumber, userGrade: userGrade)
             result(nil)
 
         case "logout":

@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import com.adaptive.core.AdaptiveCore
 import com.adaptive.core.AdaptiveUser
+import com.adaptive.core.UserGrade
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -14,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+
 
 /** Flutter plugin that bridges the Adaptive Core Android SDK. */
 class AdaptiveCoreFlutterPlugin : FlutterPlugin, MethodCallHandler {
@@ -61,6 +63,8 @@ class AdaptiveCoreFlutterPlugin : FlutterPlugin, MethodCallHandler {
                     ?: return result.error("INVALID_ARGUMENT", "userEmail is required", null)
                 val phoneNumber = call.argument<String>("phoneNumber")
                     ?: return result.error("INVALID_ARGUMENT", "phoneNumber is required", null)
+                val userGrade = call.argument<Int>("userGrade")
+                    ?.let { UserGrade.entries.find { e -> e.value == it } }
                 try {
                     AdaptiveCore.login(
                         AdaptiveUser(
@@ -68,6 +72,7 @@ class AdaptiveCoreFlutterPlugin : FlutterPlugin, MethodCallHandler {
                             userID = userId,
                             userEmail = userEmail,
                             phoneNumber = phoneNumber,
+                            userGrade = userGrade,
                         )
                     )
                     result.success(null)
