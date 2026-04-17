@@ -1,3 +1,8 @@
+## 1.0.20
+
+* Bumped iOS `AdaptiveCore` CocoaPod dependency pin to `~> 1.0.20`.
+* Bumped Android native dependency pin to `adaptive-core:1.0.20`.
+
 ## 1.0.19
 
 * Bumped iOS `AdaptiveCore` CocoaPod dependency pin to `~> 1.0.19`.

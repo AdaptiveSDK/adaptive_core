@@ -3,7 +3,7 @@ description: >-
   Flutter plugin for the Adaptive SDK Core module. Provides SDK initialization,
   user session management, and a resilient HTTP client with offline queue for
   the Adaptive e-learning platform.
-version: 1.0.19
+version: 1.0.20
 homepage: https://github.com/AdaptiveSDK/adaptive_core
 repository: https://github.com/AdaptiveSDK/adaptive_core
 issue_tracker: https://github.com/AdaptiveSDK/adaptive_core/issues
